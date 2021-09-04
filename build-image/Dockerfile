@@ -6,4 +6,4 @@ RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/inst
 
 ENV PATH="/home/companionlabs/.local/bin:${PATH}"
 
-ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["/bin/bash", "-c"]
