@@ -12,9 +12,6 @@ check:
   script:
     - ./check.sh
 
-# Per https://stackoverflow.com/q/62756669/1431244 and https://gitlab.com/gitlab-org/gitlab-foss/-/issues/27818
-# You can't check that the branch is master because the branch info isn't available if it's tagged but you can tell if
-# it's protected which is what we want.
 pypi:
   stage: deploy
   script:
