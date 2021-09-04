@@ -123,7 +123,7 @@ def main():
 from dao import Dao
 
 # DAO for injection. We don't know the command line arguments yet but we need to make this global as we need to be able
-to access it in user.py below so it's None here and gets set in main()
+# to access it in user.py below so it's None here and gets set in main()
 dao: Optional[Dao] = None
 
 #####
