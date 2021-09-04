@@ -9,6 +9,7 @@ check:
   stage: check
   script:
     - ./check.sh
+    - echo Branch is $CI_COMMIT_BRANCH, default is $CI_DEFAULT_BRANCH and tag is $CI_COMMIT_TAG. Deploying.
 
 pypi:
   stage: deploy
