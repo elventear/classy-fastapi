@@ -1,0 +1,10 @@
+stages:
+  - check
+
+default:
+  image: 3.9.7-bullseye
+
+check:
+  stage: check
+  script:
+    - ./check.sh
