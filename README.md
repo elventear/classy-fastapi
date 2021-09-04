@@ -16,7 +16,7 @@ def parse_arg() -> argparse.Namespace:
 class UserRoutes(Routable):
    """Inherits from Routable."""
 
-   # Note simply injection here by simply passing values to the constructor. Other injection frameworks also 
+   # Note injection here by simply passing values to the constructor. Other injection frameworks also 
    # supported as there's nothing sepecial about this __init__ method.
    def __init__(self, dao: Dao) -> None:
       """Constructor. The Dao is injected here."""
