@@ -156,8 +156,7 @@ performed by simply passing values to a constructor or via any other dependency 
 ## Alternatives
 
 [FastAPI-utils](https://fastapi-utils.davidmontague.xyz/user-guide/class-based-views/) has a class based views
-implementation but the routes are on the class itself rather than on **instances** of the class. Thus the injection
-remains global and you can't easily instantiate different instances with different things injected.
+implementation but the routes are on the class itself rather than on **instances** of the class.
 
 There's demand for this feature so a number of alternatives have been proposed [in an open
 bug](https://github.com/tiangolo/fastapi/issues/270) and [on
@@ -170,3 +169,9 @@ Unfortunately this does not work with `async` routes with Python versions less t
 `inspect.iscoroutinefunction`](https://stackoverflow.com/a/52422903/1431244). Specifically with older versions of Python
 `iscoroutinefunction` incorrectly returns false so `async` routes aren't `await`'d. We therefore only support Python
 versions >= 3.8
+
+# Releases
+
+Releases are built and pushed to PyPi by the CI. A release is triggered by pushing a tag on the `master` branch. That
+tag must look like a valid semver and it should start with `v`. For example adding a tag like `v0.1.1` would trigger a
+release from the CI/CD. The tag should match the tag in pyproject.toml with the `v` omitted in the `.toml` file.
