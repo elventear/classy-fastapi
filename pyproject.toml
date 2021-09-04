@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "classy-fastapi"
-version = "0.1.1"
+version = "0.1.2"
 description = "Class based routing for FastAPI"
 authors = ["Oliver Dain <oliver@dains.org>"]
 license = "MIT"
