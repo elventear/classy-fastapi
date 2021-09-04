@@ -2,7 +2,7 @@ stages:
   - check
 
 default:
-  image: "registry.gitlab.com/companionlabs-opensource/classy-fastapi:v002"
+  image: "registry.gitlab.com/companionlabs-opensource/classy-fastapi:v003"
 
 check:
   stage: check
