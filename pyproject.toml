@@ -3,7 +3,11 @@ name = "classy-fastapi"
 version = "0.1.0"
 description = "Class based routing for FastAPI"
 authors = ["Oliver Dain <oliver@dains.org>"]
-license = "MIT license"
+license = "MIT"
+readme = "README.md"
+homepage = "https://gitlab.com/companionlabs-opensource/classy-fastapi"
+repository = "https://gitlab.com/companionlabs-opensource/classy-fastapi"
+keywords = ["FastAPI", "Class", "Instance", "Routing"]
 
 [tool.poetry.dependencies]
 python = ">=3.8"
