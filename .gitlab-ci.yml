@@ -2,7 +2,7 @@ stages:
   - check
 
 default:
-  image: 3.9.7-bullseye
+  image: "python:3.9.7-bullseye"
 
 check:
   stage: check
