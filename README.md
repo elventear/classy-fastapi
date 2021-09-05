@@ -6,7 +6,7 @@ construct an **instance** of a class and have methods of that instance be route 
 ```py
 from dao import Dao
 # Some fictional dao
-from classy import Routable, get, delete
+from classy_fastapi import Routable, get, delete
 
 def parse_arg() -> argparse.Namespace:
    """parse command line arguments."""
@@ -89,8 +89,8 @@ This works but there's a few issues:
 * If we want to use the same dependency on several routes, as we would with something like a database connection, we
   have to repeat the `Dependency(to_add)` bit on each endpoint. Note that FastAPI lets you group endpoints your we can
   [include the dependency on all of them]( https://fastapi.tiangolo.com/tutorial/bigger-applications) but then there's
-  no way to access the dependency so this really only works for things like authentication where the dependency can do
-  some route handling (e.g. return a 402 if an auth header is missing).
+  no way to access the dependency from the router code so this really only works for things like authentication where
+  the dependency can do some route handling (e.g. return a 402 if an auth header is missing).
 * `to_add` is a global variable which is limiting.
 
 Let's consider an expanded, more realistic example where we have a group of routes that operate on users to add them,
@@ -148,7 +148,7 @@ updated our API in a breaking way so we've added a `/v2` set of routes. However,
 at all except that we've changed how we store users (e.g. a new password hashing algorithm) so `/v2` user routes need to
 use a different DAO. Ideally you'd call `app.include_router` twice with different prefixes but that won't work because
 the dependency on the DAO is to _a specific DAO instance_ in `user.py`. You can add [dependency
-overrides](https://fastapi.tiangolo.com/advanced/testing-dependencies/) but that adds yet more boilerplate.
+overrides](https://fastapi.tiangolo.com/advanced/testing-dependencies/) but it feels awkward.
 
 By contrast the class based routing in this package does not have any global variables at all and injection can be
 performed by simply passing values to a constructor or via any other dependency injection framework.
@@ -160,8 +160,8 @@ implementation but the routes are on the class itself rather than on **instances
 
 There's demand for this feature so a number of alternatives have been proposed [in an open
 bug](https://github.com/tiangolo/fastapi/issues/270) and [on
-StackOverflow](https://stackoverflow.com/questions/2366713/can-a-decorator-of-an-instance-method-access-the-class) but
-all seem to require global injection.
+StackOverflow](https://stackoverflow.com/q/63853813/1431244) but all seem to require global injection or hacks like
+defining all the routes inside the constructor.
 
 # Older Versions of Python
 
@@ -169,14 +169,3 @@ Unfortunately this does not work with `async` routes with Python versions less t
 `inspect.iscoroutinefunction`](https://stackoverflow.com/a/52422903/1431244). Specifically with older versions of Python
 `iscoroutinefunction` incorrectly returns false so `async` routes aren't `await`'d. We therefore only support Python
 versions >= 3.8
-
-# Releases
-
-Releases are built and pushed to PyPi by the CI. A release is triggered by pushing a tag that looks like a valid semver
-and it should start with `v`. For example adding a tag like `v0.1.1` would trigger a release from the CI/CD. The tag
-should match the tag in pyproject.toml with the `v` omitted in the `.toml` file. The deployment step will fail if the
-version in the `.toml` file does not match the version in the tag.
-
-Due to [some known issues](https://gitlab.com/gitlab-org/gitlab-foss/-/issues/27818) we can't inspect the tag **and**
-the branch but by convention releases should only happen on the `master` branch. Note that all tags that start with a
-`v` are protected and only project maintainers can create them.
