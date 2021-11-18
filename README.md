@@ -20,6 +20,7 @@ class UserRoutes(Routable):
    # supported as there's nothing sepecial about this __init__ method.
    def __init__(self, dao: Dao) -> None:
       """Constructor. The Dao is injected here."""
+      super().__init__()
       self.__dao = Dao
 
    @get('/user/{name}')
