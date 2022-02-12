@@ -16,7 +16,7 @@ pypi:
   stage: deploy
   script:
     - echo Branch is $CI_COMMIT_BRANCH and tag is $CI_COMMIT_TAG. Deploying.
-    - echo Comparing _v$(poetry version -s)_ and _$CI_COMMIT_TAG_ to ensure git tag and pyproject.toml versions match
+    - echo Comparing _v$(poetry version -s)_ and _{$CI_COMMIT_TAG}_ to ensure git tag and pyproject.toml versions match
     # Make sure the tag and the version in the .toml file match
     - "[[ v$(poetry version -s) == $CI_COMMIT_TAG ]]"
     - echo pyproject.toml version matches the tag. Pushing to pypi.
