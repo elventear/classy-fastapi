@@ -164,8 +164,8 @@ optional = false
 python-versions = ">=3.6"
 
 [package.extras]
-dev = ["pre-commit", "tox"]
-testing = ["pytest", "pytest-benchmark"]
+testing = ["pytest-benchmark", "pytest"]
+dev = ["tox", "pre-commit"]
 
 [[package]]
 name = "py"
@@ -309,7 +309,7 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.8"
-content-hash = "4e7ae28134554736b0c245b1ff1ef0d889a74654557591dae2f62c9f2754c050"
+content-hash = "e586d8eb529db737ad6a4ef1da3cc6a2ee2217d0a91cc96a5d2d999ac174ee05"
 
 [metadata.files]
 anyio = [
