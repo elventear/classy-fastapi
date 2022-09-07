@@ -32,8 +32,8 @@ class Routable(metaclass=RoutableMeta):
     """
     _endpoints: List[EndpointDefinition] = []
 
-    def __init__(self) -> None:
-        self.router = APIRouter()
+    def __init__(self, *args, **kwargs) -> None:
+        self.router = APIRouter(*args, **kwargs)
         for endpoint in self._endpoints:
             self.router.add_api_route(endpoint=partial(endpoint.endpoint, self),
                                       **dataclasses.asdict(endpoint.args))
