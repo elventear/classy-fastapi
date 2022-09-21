@@ -1,3 +1,4 @@
+import inspect
 from enum import Enum
 from typing import (Any, Callable, Dict, List, Optional, Sequence, Type,
                     Union, TypeVar)
@@ -23,8 +24,17 @@ def route(path: str, methods: List[str], **kwargs: Any) -> Callable[[AnyCallable
     the list of methods.
     """
     def marker(method: AnyCallable) -> AnyCallable:
+        args = RouteArgs(path=path, methods=methods, **kwargs)
+        if args.name is None:
+            args.name = method.__name__
+        if not args.description:
+            description = inspect.cleandoc(method.__doc__ or "")
+            # Note that the description has to have at least one character or the docs will, incorrectly, come from the
+            # partial class. See
+            # https://gitlab.com/companionlabs-opensource/classy-fastapi/-/merge_requests/8#note_1108105696.
+            args.description = description or " "
         setattr(method, '_endpoint',
-                EndpointDefinition(endpoint=method, args=RouteArgs(path=path, methods=methods, **kwargs)))
+                EndpointDefinition(endpoint=method, args=args))
         return method
     return marker
 
