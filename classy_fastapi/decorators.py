@@ -29,6 +29,9 @@ def route(path: str, methods: List[str], **kwargs: Any) -> Callable[[AnyCallable
             args.name = method.__name__
         if not args.description:
             description = inspect.cleandoc(method.__doc__ or "")
+            # Note that the description has to have at least one character or the docs will, incorrectly, come from the
+            # partial class. See
+            # https://gitlab.com/companionlabs-opensource/classy-fastapi/-/merge_requests/8#note_1108105696.
             args.description = description or " "
         setattr(method, '_endpoint',
                 EndpointDefinition(endpoint=method, args=args))
