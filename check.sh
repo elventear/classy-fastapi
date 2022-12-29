@@ -5,4 +5,4 @@
 poetry install
 poetry run pytest
 poetry run mypy -p classy_fastapi
-poetry run flake8
+poetry run flake8 --exclude .venv

@@ -1,3 +1,5 @@
+poetry.lock
+.idea/
 __pycache__/
 /.vim/
 /dist/

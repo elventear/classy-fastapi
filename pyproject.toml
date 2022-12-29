@@ -19,6 +19,7 @@ pytest = "^6.2.5"
 flake8 = "^3.9.2"
 mypy = "^0.910"
 requests = "^2.26.0"
+fastapi = { version = ">=0.73.0,<1.0.0", extras=["all"]}
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
